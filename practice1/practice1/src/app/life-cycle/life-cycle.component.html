@@ -1,0 +1,15 @@
+<!-- String Interpolate with @output to bind external DOM see app.component.html -->
+<p #boundParam>
+  life-cycle works!
+  {{bindable}}
+  This is a template
+</p>
+<!--Local params see #boundParam above can only exist within template-->
+  {{boundParam.textContent}}
+
+<!--This ViewChild can only live within own template but content taken from ts class-->
+<p #boundParagraph>
+  this is from TS.component, not just local variable of template
+</p>
+{{boundParagraph.textContent}}
+  <ng-content></ng-content>
