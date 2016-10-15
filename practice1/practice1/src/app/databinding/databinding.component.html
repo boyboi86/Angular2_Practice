@@ -1,0 +1,20 @@
+<p>
+  databinding works!
+  {{stringInterpolation}} | {{ numberInterpolation }}
+<!--string interpolate -->
+  <input value="{{ stringInterpolation }}"/>
+<!--property binding w/o cruly brackets-->
+  <input [value]="stringInterpolation" />
+</p>
+  <h4 [ngClass]="{redBorder: true}">H4 ref</h4>
+<!-- attched wih function is equally possible -->
+  <h4 [ngClass]="{greenBorder: onTrue()}">Green H4</h4>
+  <!-- style ng take note the string for style is key-->
+  <h4 [ngStyle]="{color: 'blue'}">blue text</h4>
+<h1>Custom binding for property</h1>
+<!-- Property binding works even outside of template when you add @Input-->
+<app-property-binding [result]="10"></app-property-binding>
+<!-- Each prop or event can only be embedded into their tags once as such to componentize-->
+<app-event-binding (clicked)="onClicked($event)"></app-event-binding>
+<div>two way binding</div>
+<app-two-way-binding></app-two-way-binding>
