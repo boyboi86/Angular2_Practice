@@ -1,0 +1,31 @@
+<h1>
+  {{title}}
+</h1>
+  <app-others></app-others>
+<!-- components are highly reusable -->
+  <app-another>
+    <h1>hello</h1>
+    <h2>world</h2>
+  </app-another>
+  <app-another>
+  <p>
+    {{pass}}
+  </p>
+  </app-another>
+  <app-life-cycle *ngIf="!delete" [bindable]="boundvalue">
+    <p #globalParam>
+      This paragraph is from app.component not from lifecycle.component
+    </p>
+    <!--Using metatag ContentChild to render a html element
+      via injection from ts class see life-cycle.component.ts
+      can live within ng-content-->
+
+     {{globalParam.textContent}}
+  </app-life-cycle>
+  <p>
+    {{test}}
+  </p>
+  <button (click)="test = 'changed value'">Changed</button>
+  <button (click)="delete = true">Delete</button>
+  <button (click)="boundvalue = 3000">New Value</button>
+  <!--Testing a global content child variable to lifecycle.component-->
