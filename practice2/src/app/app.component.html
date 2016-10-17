@@ -1,0 +1,69 @@
+<h1>Attribute directives </h1>
+<!--ng directive binding to css stylesheets-->
+<div [ngClass]="{ border: true, background: true}">
+ngClass demo
+</div>
+<!--native class binding-->
+<div [class.border]="true" [class.background]="true">
+  Alternative to class
+</div>
+<!--ng directive binding but have to spell out exactly what you want in a style-->
+<div [ngStyle]="{'border': '5px solid pink', 'background-color': 'blue'}">
+  ngStyle demo
+</div>
+<hr />
+<h1>Custom attribute directive</h1>
+<!--ng directive but style from highlight.directive.ts using TS-->
+<div appHighlight>
+  This is an directive
+</div>
+<!--ng directive using events and host listener & binding from eventhighlight.directive.ts-->
+<div appEventshighlight>
+  move mouse here!
+</div>
+<!--if you do not set props default here, it's the same as below-->
+<div appInputhighlight>
+  move here, @input
+</div>
+<!--Either with props or not it works the same-->
+<div appInputhighlight [ChangeColor]="'pink'" [OriginalColor]="'blue'" [ChangeBorder]="'5px solid blue'" [OriginalBorder]="'5px solid pink'">
+  move here @input with ngInit
+</div>
+<hr />
+<h1>Structural directive</h1>
+<!--if you use <template> you can go ahead and use prop binding instead of *
+  this is applicable to all structural dir with *-->
+<template [ngIf]="switch">
+  <p>Conditional Text using de-sugar template with [ngIf]</p>
+</template>
+<!--Can only be used in component level TS with View because it directly inserts and remove from DOM NODE(NOT HIDE OR SHOW)-->
+<p *ngIf="switch">Conditional Text using *ngIf</p>
+<button  (click)="onSwitch()">Switch</button>
+<!--Similar to angularJS but this time round indexing is possible-->
+<p>*ngFor</p>
+<ul>
+  <li *ngFor="let item of items; let i = index">{{item}} index of {{i}}</li>
+</ul>
+<!--ngSwitch is a list of conditions with no * -->
+<!--ngSwitchDefault has no expressions -->
+<!-- works when template is like this <div><p> -->
+<p>ngSwitch</p>
+<div [ngSwitch]="value">
+  <p *ngSwitchCase="10">10</p>
+  <p *ngSwitchCase="100">100</p>
+  <p *ngSwitchDefault>0</p>
+</div>
+<!--if you use <template> you can go ahead and use prop binding instead of *
+  this is applicable to all structural dir with *-->
+  <div [ngSwitch]="value">
+      <template [ngSwitchCase]="10">10</template>
+      <template [ngSwitchCase]="100">100</template>
+      <template ngSwitchDefault>0</template>
+  </div>
+  <!--Custom Directive-->
+
+<p *appUnless="switch">
+  <strong>Conditional text using custom directive</strong>
+  <br />
+  If you can see this means you triggered an event for *ngIf in the above
+</p>

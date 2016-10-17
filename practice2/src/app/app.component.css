@@ -1,0 +1,13 @@
+.border {
+  border: 5px solid pink;
+}
+
+.background {
+  background-color: blue;
+}
+
+div {
+  margin-top: 2px;
+  height: 100px;
+  width: 100px;
+}
