@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <h1>Hello World!</h1>
+            <!--This path will ensure to be redirected to user/10 if left empty-->
+            <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <br  />
+            <!--if use href instead of [routerLink] page will keep reloading-->
+            <!--if use href instead of always use [''] tp specify path-->
+            <a [routerLink]="['']" [queryParams]="{analytics: 'random'}">Home with random as query</a>
+            <input type="text" #id (input)="0" />
+            <br />
+            <a [routerLink]="['user']" routerLinkActive="active">User</a>
+            <!--the second routerLink lead to same url but contain additional arguement
+              so when state pathMatch: 'full' it will not be redirected-->
+            <a [routerLink]="['user', id.value]" [queryParams]="{analytics: 300}">User with query</a>
+            <!--router-outlet will render child component specified within RouteModule-->
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
