@@ -1,0 +1,47 @@
+<h1>Template Driven</h1>
+<!--Basically form used a basic trick to use #f and use ng-submit to submit the entire form-->
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <!--ngModelGroup can be used to group data-->
+  <div ngModelGroup="userData">
+    <div class="form-group">
+      <!--You need to put ngModel and name attribute to register your form for template driven forms-->
+      <label for="username">Username</label>
+      <input type="text"
+             class="form-control"
+             id="username"
+             [(ngModel)]="user.username"
+             name="username"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="email">E-Mail</label>
+      <!--In order to target form inputs it is important to give them an id-->
+      <input type="text"
+             class="form-control"
+             id="email"
+             [(ngModel)]="user.email"
+             name="email"
+             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+             required
+             #email="ngModel">
+             <!--valid & touched are part of input attributes for more attributes try to console.log(target)-->
+        <div *ngIf="!email.valid && email.touched">
+          Invalid Email
+        </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password"
+           class="form-control"
+           id="password"
+          [(ngModel)]="user.password"
+           name="password">
+  </div>
+  <div class="radio" *ngFor="let g of genders">
+    <label>
+      <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="g"/>{{g}}
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
