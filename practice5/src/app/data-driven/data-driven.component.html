@@ -1,29 +1,38 @@
 <h1>Data Driven</h1>
-<form>
-    <div>
+<!--Specify the form props and link up with component using [formGroup]-->
+<form [formGroup]="AForm" (ngSubmit)="onSubmit()">
+<!--Specify the formGroupName if this is a group within an existing group-->
+    <div formGroupName="userdata">
+<!--Apply formControlName to specific formControls in component-->
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text"
                    class="form-control"
-                   id="username">
+                   id="username"
+                   formControlName="username">
         </div>
+<!--Apply formControlName to specific formControls in component-->
         <div class="form-group">
             <label for="email">E-Mail</label>
             <input type="text"
                    class="form-control"
-                   id="email">
+                   id="email"
+                   formControlName="email">
         </div>
+<!--access particular form-control using .controls[] -->
+        <div *ngIf="!AForm.get('userdata.email').valid && AForm.get('userdata.email').touched">Invalid email</div>
     </div>
-
+<!--Apply formControlName to specific formControls in component-->
     <div class="form-group">
         <label for="password">Password</label>
         <input type="password"
                class="form-control"
-               id="password">
+               id="password"
+               formControlName="password">
     </div>
-    <div class="radio">
-        <label>
-        </label>
+    <div *ngFor="let g of genders">
+        <label>{{g}}</label>
+          <input type="radio" formControlName="gender" [value]="g"/>
     </div>
     <div>
         <h3>Hobbies</h3>
@@ -33,5 +42,5 @@
         </div>
     </div>
     <button type="button" class="btn btn-default">Add Hobby</button>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!AForm.valid">Submit</button>
 </form>
