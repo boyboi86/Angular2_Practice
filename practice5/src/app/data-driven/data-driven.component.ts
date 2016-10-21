@@ -19,7 +19,7 @@ export class DataDrivenComponent {
       'password': new FormControl('', Validators.required),
       'gender': new FormControl(''),
       'hobbies': new FormArray([
-        new FormControl('Cooking', Validators.required)
+        new FormControl('Cooking', Validators.required, this.asyncExampleValidator)
       ])
     })
   }
@@ -28,7 +28,7 @@ export class DataDrivenComponent {
   }
 
   onAddHobby(){
-    (<FormArray>this.AForm.get('hobbies')).push(new FormControl('', Validators.required));
+    (<FormArray>this.AForm.get('hobbies')).push(new FormControl('', Validators.required, this.asyncExampleValidator));
   }
   /*Custom Validator, if username were to be 'Example' you will not be able to submit
     return null is essential DO NOT return false because false is boolean ONLY return null*/
@@ -37,5 +37,21 @@ export class DataDrivenComponent {
       return {example: true}
     }
     return null;
+  }
+  /*Custom Validator that is async similar to non-async
+    always resolve true otherwise resolve null (return nothing)*/
+  asyncExampleValidator(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>(
+      (resolve, reject) => {
+        setTimeout(() => {
+          if(control.value === 'Example'){
+            resolve({'invalid': true});
+          } else {
+            resolve(null);
+          }
+        }, 1500);
+      }
+    );
+    return promise;
   }
 }
