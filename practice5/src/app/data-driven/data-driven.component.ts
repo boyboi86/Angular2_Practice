@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'data-driven',
@@ -12,7 +13,7 @@ export class DataDrivenComponent {
   constructor(private formBuilder: FormBuilder){
     this.AForm = new FormGroup({
       'userdata': new FormGroup({
-        'username': new FormControl('username', Validators.required),
+        'username': new FormControl('username', [Validators.required, this.exampleValidator]),
         'email': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")])
       }),
       'password': new FormControl('', Validators.required),
@@ -28,5 +29,13 @@ export class DataDrivenComponent {
 
   onAddHobby(){
     (<FormArray>this.AForm.get('hobbies')).push(new FormControl('', Validators.required));
+  }
+  /*Custom Validator, if username were to be 'Example' you will not be able to submit
+    return null is essential DO NOT return false because false is boolean ONLY return null*/
+  exampleValidator(control: FormControl): {[s: string]: boolean} {
+    if(control.value === 'Example') {
+      return {example: true}
+    }
+    return null;
   }
 }
