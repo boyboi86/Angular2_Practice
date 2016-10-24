@@ -9,3 +9,35 @@
 <p>
   {{myMoney | currency:'SGD'}}
 </p>
+<p>
+  pipe chaining:
+{{myValue | slice:0:5 | uppercase}}
+</p>
+<!-- In order to do a custom pipe you need a @pipe generated -->
+<h2>Cutom pipe</h2>
+<p>
+  <input type="text" #input (keyup)="0"/>
+  {{input.value | double}}
+</p>
+<p>
+  filter pipe:
+</p>
+<!-- The original values are millk, bread, beans but milk in this case has been filtered -->
+<ul>
+  <li *ngFor="let value of values | filter:'ea'">
+    {{value}}
+  </li>
+</ul>
+<div>
+  <input type="text" #newItem />
+  <button (click)="values.push(newItem.value)">Add item</button>
+  <ul>
+    <li *ngFor="let value of values">
+      {{value}}
+    </li>
+  </ul>
+</div>
+<!-- For async pipe remember to add async term -->
+<div>
+  {{asyncValue | async}}
+</div>
