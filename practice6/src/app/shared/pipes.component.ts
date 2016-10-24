@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class PipesComponent {
   myValue = "lowercase";
   myDate = new Date();
+  myMoney = 200
   constructor() { }
 
 }

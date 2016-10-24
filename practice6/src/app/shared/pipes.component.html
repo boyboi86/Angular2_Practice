@@ -1,9 +1,11 @@
 <p>
   pipes works!
 </p>
+<p>{{myValue | uppercase}}</p>
+<p>{{myDate | date}}</p>
 <p>
-    {{myValue | uppercase}}
+  {{myValue | slice:0:5}}
 </p>
 <p>
-  {{myDate | date}}
+  {{myMoney | currency:'SGD'}}
 </p>
