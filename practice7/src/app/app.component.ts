@@ -10,7 +10,7 @@ import { HttpService } from './http.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  instructions = "kindly refer to developer console if you are using chrome, you will see a call has been made"
+  instructions = this.httpService.getData();
   items: any[];
   constructor(private httpService: HttpService) {}
 
