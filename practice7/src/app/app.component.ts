@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
+// import { Response } from '@angular/http';
 
 import { HttpService } from './http.service';
 // import { subscribe } from 'rxjs/Rx';
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     this.httpService.getData()
-                    .subscribe((data: Response) => {
+                    .subscribe((data: any) => {
                       console.log(data)
                     })
   }
